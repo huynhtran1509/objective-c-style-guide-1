@@ -36,28 +36,31 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Singletons](#singletons)
 * [Xcode Project](#xcode-project)
 
-## Dot-Notation Syntax
+##Dot-Notation Syntax
 
-Dot-notation should **always** be used for accessing and mutating properties. Bracket notation is preferred in all other instances.
+Properties တွေအတွက် dot-notation ကို အမြဲ အသုံးပြုပါ။ Instances အတွက် bracket notation ကို အသုံးပြုပါ။
 
-**For example:**
+ဥပမာ
+
 ```objc
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
 ```
 
-**Not:**
+ဒီလို မသုံးပါနှင့်
+
 ```objc
 [view setBackgroundColor:[UIColor orangeColor]];
-UIApplication.sharedApplication.delegate;
+UIApplication.shareAppliaction.delegate;
 ```
 
-## Spacing
+##Spacing
 
-* Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+- Indent အတွက် 4 spaces ကို အသုံးပြုမည်။ Tabs ကို အသုံးမပြုပါ ။ Xcode preference ကို ပြင်ထားဖို့လိုသည်။
+- Method braces နှင့် အခြား brances (`if` / `else`/`switch`/`while`) စသည်တို့ကို open အတွက် same line တွင် အသုံးပြုမည်ဖြစ်ပြီး close ကို new line မှာ အသုံးပြုမည်။
 
-**For example:**
+ဥပမာ
+
 ```objc
 if (user.isHappy) {
 //Do something
@@ -66,51 +69,58 @@ else {
 //Do something else
 }
 ```
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
-* `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
 
-## Conditionals
+- method တစ်ခု နဲ့ တစ်ခုကြား blank လိုင်း တစ်ခု ထားပေးရမည်။ သို့မှသာ ထင်ရှားစွာ မြင်တွေ့နိုင်မည်။
+- `@synthesize`နှင့် `@dynamic` စသည်တို့ကို လိုင်း အသစ်တွေ ရေးသားရမည်။
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+##Conditionals
 
-**For example:**
+Conditional ရဲ့ body ဟာ အမြဲတန်း အဖွင့် နှင့် အပိတ်ကို အသုံးပြုမည်။ အဖွင့် အပိတ် မပါခြင်း (လိုင်းတစ်ကြောင်း တည်းရေးခြင်း) ကို အသုံးမပြု။ တစ်ကြောင်းတည်း အသုံးပြုခြင်းသည် [အန္တရာယ်](http://programmers.stackexchange.com/questions/16528/single-statement-if-block-braces-or-no/16530#16530) ရှိသည်။ လက်ရှိ style guide တွင် လွယ်ကူစွာ ဖတ်ရှုနိုင်ရန် အဖွင့် နှင့် အပိတ်ကို မဖြစ်မနေ အသုံးပြုရမည်။
+
+ဥပမာ
+
 ```objc
 if (!error) {
     return success;
 }
 ```
 
-**Not:**
+ဒီလို မရေးပါ
+
 ```objc
 if (!error)
     return success;
 ```
 
-or
+ဒါမှမဟုတ်
 
 ```objc
 if (!error) return success;
 ```
 
-### Ternary Operator
+###Ternary Operator
 
-The Ternary operator, ? , should only be used when it increases clarity or code neatness. A single condition is usually all that should be evaluated. Evaluating multiple conditions is usually more understandable as an if statement, or refactored into instance variables.
+Ternary operator, ? , တို့ကို ရှင်းရှင်းလင်းလင်း ရေးသင့်သည်။ conditin တစ်ခု တည်း ကို သာ အသုံးပြုသင့်သည်။ multiple conditions များသည် နားလည်ရခက်ပြီး variable များ ရှုပ်ထွေးနိုင်သောကြောင့် ဖြစ်သည်။
 
-**For example:**
+ဥပမာ
+
 ```objc
 result = a > b ? x : y;
 ```
 
-**Not:**
+ဒီလို မရေးပါ
+
 ```objc
 result = a > b ? x = c > d ? c : d : y;
 ```
 
+
 ## Error handling
 
-When methods return an error parameter by reference, switch on the returned value, not the error variable.
+error variable ကို အသုံးမပြုပါ။ error ကို by reference ဖြင့် အသုံးပြုသည်။
 
-**For example:**
+ဥပမာ
+
 ```objc
 NSError *error;
 if (![self trySomethingWithError:&error]) {
@@ -118,7 +128,8 @@ if (![self trySomethingWithError:&error]) {
 }
 ```
 
-**Not:**
+ဒီလို မဟုတ်ပါ။
+
 ```objc
 NSError *error;
 [self trySomethingWithError:&error];
@@ -127,25 +138,25 @@ if (error) {
 }
 ```
 
-Some of Apple’s APIs write garbage values to the error parameter (if non-NULL) in successful cases, so switching on the error can cause false negatives (and subsequently crash).
+## Method
 
-## Methods
+Method မာျးကို (-/+ symbol) ပြီးလျှင် space ခြားသည်။ method segment ကြားတွင်လည်း space ခြားသည်။
 
-In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.
+ဥပမာ
 
-**For Example**:
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
-## Variables
 
-Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops.
+## Variable
 
-Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
+Variable name တွေဟာ အတတ်နိုင်ဆုံး အဓိပ္ပာယ်ပြည့်ဝ အောင် ရေးသားဖို့လိုပါတယ်။ Single letter varialble name တွေကို `for()` loop မှ လွဲ ၍ အသုံးမပြုပါ။
 
-Property definitions should be used in place of naked instance variables whenever possible. Direct instance variable access should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
+Asterisks ကို varialble ၏ ရှေ့တွင် ရေးသားပါသည်။ ဥပမာ `NSString *text` ဒီလို အသုံးမပြုပါ `NSString* text` ဒါမှမဟုတ် `NSString * text` 
 
-**For example:**
+Property definitations တွေမှာ naked instance varialble ကို ဖြစ်နိုင်လျှင် အသုံးပြုပါ။ 
+
+ဥပမာ 
 
 ```objc
 @interface NYTSection: NSObject
@@ -155,7 +166,7 @@ Property definitions should be used in place of naked instance variables wheneve
 @end
 ```
 
-**Not:**
+ဒီလို မဟုတ်ပါ။:
 
 ```objc
 @interface NYTSection : NSObject {
@@ -165,45 +176,44 @@ Property definitions should be used in place of naked instance variables wheneve
 
 ## Naming
 
-Apple naming conventions should be adhered to wherever possible, especially those related to [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)).
+Apple naming conventions ကို ဖြစ်နိုင်ရင် လေ့လာလိုက်နာသင့်သည်။ အထူးသဖြင့် [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)) နဲ့ ပတ်သက်တဲ့ အပိုင်းတွေကိုပေါ့။
 
-Long, descriptive method and variable names are good.
-
-**For example:**
+ဥပမာ
 
 ```objc
 UIButton *settingsButton;
 ```
 
-**Not**
+ဒီလို မဟုတ်ပါ။
 
 ```objc
 UIButton *setBut;
 ```
 
-A three letter prefix (e.g. `NYT`) should always be used for class names and constants, however may be omitted for Core Data entity names. Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity.
+စာသုံးလို့ ကို ရှေ့မှာ ထားတဲ့ ပုံစံ ( ဥပမာ `NYT`) ကို class name ,constant တွေရဲ့ ရှေ့မှာ အသုံးပြုပါ။ Core Data entity names မှာ တော့ အသုံးမ​ပြုပါနဲ့။
 
-**For example:**
+ဥပမာ
+
 
 ```objc
 static const NSTimeInterval NYTArticleViewControllerNavigationFadeAnimationDuration = 0.3;
 ```
 
-**Not:**
+ဒီလိုမရေးပါ။
 
 ```objc
 static const NSTimeInterval fadetime = 1.7;
 ```
 
-Properties should be camel-case with the leading word being lowercase. **If Xcode can automatically synthesize the variable, then let it.** Otherwise, in order to be consistent, the backing instance variables for these properties should be camel-case with the leading word being lowercase and a leading underscore. This is the same format as Xcode's default synthesis.
+Properties တွေ အတွက် camel-case(စာလုံးကြီးအသေးအကြီး ပုံစံ) ကို အသုံးပြုပါမည်။ စတဲ့ စာလုံးကိုတော့ အသေးနဲ့ပဲစပါမယ်။ တကယ်လို့ Xcode က synthesize variable ကို အလိုအလျောက် generate လုပ်ပေးရင်တော့ ထားလိုက်ပါ။ မဟုတ်ခဲ့ရင်တော့ properties ကို camel-case အသုံးပြုပြီးတော့ synthesize အတွက် underscore စတာကို အသုံးပြုပါမယ်။
 
-**For example:**
+ဥပမာ
 
 ```objc
 @synthesize descriptiveVariableName = _descriptiveVariableName;
 ```
 
-**Not:**
+ဒီလိုမရေးပါ။
 
 ```objc
 id varnm;
@@ -211,7 +221,7 @@ id varnm;
 
 ### Underscores
 
-When using properties, instance variables should always be accessed and mutated using `self.`. This means that all properties will be visually distinct, as they will all be prefaced with `self.`. Local variables should not contain underscores.
+Properties , instance variable ကို အသုံးပြုတဲ့ အခါမှာ `self` ကို အသုံးပြုပါ။ local variables တွေရဲ့ နာမည်မှာ underscores မပါသင့်ပါဘူး။
 
 ## Comments
 
