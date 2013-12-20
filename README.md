@@ -223,15 +223,15 @@ Properties , instance variable ကို အသုံးပြုတဲ့ အ�
 
 ## Comments
 
-When they are needed, comments should be used to explain **why** a particular piece of code does something. Any comments that are used must be kept up-to-date or deleted.
+comments တွေ ရေးဖို့လိုတဲ့ အခါမှာ **why** ကို ရှင်းပြပေးဖို့လိုပါတယ်။ comments အားလုံးတွေဟာ up-to-date ဒါမှမဟုတ် မရှိတော့တာတွေကို ဖျက်ထားပေးဖို့လိုပါတယ်။
 
-Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
+Block comments ကို တတ်နိုင်လျှင် ရှောင်ရှားသင့်ပါတယ်။ code တွေဟာ self-documenting ဖြစ်ဖို့လိုပါတယ်။ စာကြောင်း အနည်းငယ်နဲ့ ရှင်းပြထားဖို့သာ လိုအပ်သည်။ ထိုရှင်းပြထားသည်များကို documentation generate လုပ်တဲ့ အခါတွင် အသုံးပြုမှာ မဟုတ်ပါဘူး။
 
 ## init and dealloc
 
-`dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. `init` should be placed directly below the `dealloc` methods of any class.
+`dealloc` methods တွေဟာ ထိပ်မှာ implementation လုပ်ထားဖို့လိုပါသည်။ `@synthesize` နှင့် `@dynamic` အပြီးတွင် ရေးဖို့လိုသည်။ `init` ဟာ class ရဲ့ `dealloc` method  အောက်တွင် ရေးဖို့လိုသည်။
 
-`init` methods should be structured like this:
+`init` method သည် အောက်ပါ ပုံစံ ဖြစ်ရမည်။
 
 ```objc
 - (instancetype)init {
