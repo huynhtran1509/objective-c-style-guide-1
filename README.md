@@ -246,9 +246,9 @@ Block comments ကို တတ်နိုင်လျှင် ရှောင
 
 ## Literals
 
-`NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
+`NSString`, `NSDictionary`, `NSArray`, နှင့် `NSNumber` တို့ကို imutable instance objects  တွေ ဖန်တီးတဲ့ အခါမှာ အသုံးပြုပါ။ `nil` value ကို `NSArray` နှင့် `NSDictionary` တို့၏ literals တွင် ထည့်သွင်းလို့ မရပါ။ crash ဖြစ်နိုင်သည်။
 
-**For example:**
+**ဥပမာ :**
 
 ```objc
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
@@ -257,7 +257,7 @@ NSNumber *shouldUseLiterals = @YES;
 NSNumber *buildingZIPCode = @10018;
 ```
 
-**Not:**
+**ဒီလို မသုံးပါနှင့်:**
 
 ```objc
 NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul", nil];
