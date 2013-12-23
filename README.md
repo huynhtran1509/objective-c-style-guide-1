@@ -320,9 +320,9 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 
 ## Enumerated Types
 
-When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types — `NS_ENUM()`
+`enum` ကို အသုံးပြုတဲ့ အခါမှာ underlying type ကို သေသေချာချာကြေငြာခဲ့ဖို့ လိုပါတယ်။ code completion ကို အထောက်အကူပြုရန် အတွက်ဖြစ်ပါသည်။ SDK တွင် underlying ကို `NS_ENUM()` macro ကို အသုံးပြုပြီး ရေးနိုင်ပါသည်။
 
-**Example:**
+**ဥပမာ:**
 
 ```objc
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
