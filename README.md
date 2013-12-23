@@ -268,11 +268,15 @@ NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
 
 ## CGRect Functions
 
-When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) instead of direct struct member access. From Apple's `CGGeometry` reference:
+
+`CGRect` ရဲ့ `x`, `y`, `width`, သို့မဟုတ် `height` တို့ကို access လုပ်တဲ့ အခါမှာ direct struct ခေါ်မည့်အစား [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) ကို အသုံးပြုပါ။
+
+Apple's `CGGeometry` reference တွင် ဖော်ပြထားသည်မှာ :
 
 > All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
 
-**For example:**
+
+**ဥပမာ:**
 
 ```objc
 CGRect frame = self.view.frame;
@@ -283,7 +287,7 @@ CGFloat width = CGRectGetWidth(frame);
 CGFloat height = CGRectGetHeight(frame);
 ```
 
-**Not:**
+**ဒီလို မသုံးပါနှင့်:**
 
 ```objc
 CGRect frame = self.view.frame;
@@ -296,9 +300,9 @@ CGFloat height = frame.size.height;
 
 ## Constants
 
-Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables and can be quickly changed without the need for find and replace. Constants should be declared as `static` constants and not `#define`s unless explicitly being used as a macro.
+Constans တွေကို in-line string literals သို့မဟုတ် numbers အနေဖြင့် အသုံးပြုသင့်သည်။ search and replace လုပ်စရာမလိုပဲ value ကို လွယ်လင့်တကူ ပြောင်းလဲနိုင်ရန် အတွက် ဖြစ်သည်။ Constanst တွေကို `static` ကြေငြာပါ။ macro မှ လွဲ၍ `define` ကို ဖြစ်နိုင်လျှင် အသုံးမပြုပါနှင့်။  
 
-**For example:**
+**ဥပမာ :**
 
 ```objc
 static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times Company";
@@ -306,7 +310,7 @@ static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times
 static const CGFloat NYTImageThumbnailHeight = 50.0;
 ```
 
-**Not:**
+**ဒီလို မသုံးပါနှင့် :**
 
 ```objc
 #define CompanyName @"The New York Times Company"
