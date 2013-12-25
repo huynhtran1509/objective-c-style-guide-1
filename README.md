@@ -333,9 +333,9 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 
 ## Private Properties
 
-Private properties should be declared in class extensions (anonymous categories) in the implementation file of a class. Named categories (such as `NYTPrivate` or `private`) should never be used unless extending another class.
+Priavte properties တွေဟာ class ရဲ့ implementation file မှာ class extension (anonymous categories) အနေနဲ့ ကြေငြာသင့်ပါတယ်။ 
 
-**For example:**
+**ဥပမာ:**
 
 ```objc
 @interface NYTAdvertisement ()
@@ -349,29 +349,27 @@ Private properties should be declared in class extensions (anonymous categories)
 
 ## Image Naming
 
-Image names should be named consistently to preserve organization and developer sanity. They should be named as one camel case string with a description of their purpose, followed by the un-prefixed name of the class or property they are customizing (if there is one), followed by a further description of color and/or placement, and finally their state.
+ပုံနာမည်ပေးတဲ့ အခါမှာ အသုံးပြုရမည့်ပေါ်မှာမူတည်ပြီးတော့ camel case ပုံ နာမည်ပေးသင့်ပါသည်။ အကယ်၍ တစ်ခုတည်းတွင် အသုံးပြုမည် ဆိုပါက နာမည်ရဲ့ ရှေ့မှာ အသုံးပြုမည့် class ဒါမှမဟုတ် protoerty ရဲ့ အမည်ကို ရှေ့တွင် ထည့်သွင်းရေးသားသင့်သည်။ 
 
-**For example:**
+**ဥပမာ:**
 
 * `RefreshBarButtonItem` / `RefreshBarButtonItem@2x` and `RefreshBarButtonItemSelected` / `RefreshBarButtonItemSelected@2x`
 * `ArticleNavigationBarWhite` / `ArticleNavigationBarWhite@2x` and `ArticleNavigationBarBlackSelected` / `ArticleNavigationBarBlackSelected@2x`.
 
-Images that are used for a similar purpose should be grouped in respective groups in an Images folder.
+ပုံတွေကို အသုံးပြုမည့် ပုံစံ တူညီပါက group ဖွဲ့ပြီး images folder တွင် သိမ်းထားသင့််သည်။
 
 ## Booleans
 
-Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Never compare something directly to `YES`, because `YES` is defined to 1 and a `BOOL` can be up to 8 bits.
+`nil` သည် `NO` ဖြင့် အတူတူဖြစ်သည်။ ထို့ကြောင့် `nil` ကို ထည့်သွင်း စစ်ဆေးနေရန် မလိုပါ။ `YES` ကို တိုက်ရိုက် compare မလုပ်သင့်ပေ။ `YES` သည် 1 ဖြင့် အတူတူဖြစ်ပြီး `BOOL` ဟာ 8 bits ကို အသုံးပြုထားသည်။
 
-This allows for more consistency across files and greater visual clarity.
-
-**For example:**
+**ဥပမာ:**
 
 ```objc
 if (!someObject) {
 }
 ```
 
-**Not:**
+**ဒီလို မသုံးပါ:**
 
 ```objc
 if (someObject == nil) {
@@ -380,14 +378,14 @@ if (someObject == nil) {
 
 -----
 
-**For a `BOOL`, here are two examples:**
+**`BOOL`, အတွက် နောက်ထပ် ဥပမာ:**
 
 ```objc
 if (isAwesome)
 if (![someObject boolValue])
 ```
 
-**Not:**
+**'ဒီလို မသုံးပါ:**
 
 ```objc
 if ([someObject boolValue] == NO)
@@ -396,16 +394,19 @@ if (isAwesome == YES) // Never do this.
 
 -----
 
-If the name of a `BOOL` property is expressed as an adjective, the property can omit the “is” prefix but specifies the conventional name for the get accessor, for example:
+အကယ်၍ `BOOL` protpery name ဟာ adjective ဖြစ်ခဲ့လျှင် is prefix ကို မသုံးလျှင်ရသည်။ သို့ပေမယ့် get accessor တွင် ထည့်သွင်းရေးပါ။
+
+**ဥပမာ :**
 
 ```objc
 @property (assign, getter=isEditable) BOOL editable;
 ```
-Text and example taken from the [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE).
+စာ နှင့် ဥပမာ ကို [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE) မှ ကူးယူးဖော်ပြထားသည်။
 
 ## Singletons
 
-Singleton objects should use a thread-safe pattern for creating their shared instance.
+Singleton objects ဟာ shared instance တွေ ဖန်တီးရာမှာ thread-safe pattern ဖြစ်အောင် အသုံးပြုသင့်သည်။
+
 ```objc
 + (instancetype)sharedInstance {
    static id sharedInstance = nil;
@@ -418,17 +419,17 @@ Singleton objects should use a thread-safe pattern for creating their shared ins
    return sharedInstance;
 }
 ```
-This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
+တစ်ခါတစ်လေ [prolific crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html) ဖြစ်ခြင်းကို ကာကွယ်နိုင်သည်။
 
 ## Xcode project
 
-The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
+physical files များသည် Xcode projects files ဖြင့် sync ဖြစ်နေရမည်။ file များ ပြန့်ကျဲ နေမှု မရှိအောင် ထားရမည်။ Xcode groups ဖန်တီးမှုသည် file system ထဲရှိ folder တွင် လည်း သက်ရောက်မှု ရှိရမည်။ Code တွေကို type ဖြင့် group လုပ်ရုံသာ မက အသုံးပြုမည့် fetuare ပေါ်မူတည်ပြီးတော့လည်း group လုပ်သင့်သည်။
 
-When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
+ဖြစ်နိုင်လျှင် target's Build Settings ထဲတွင် "Treat Warnings as Errors" ကို အမြဲတန်း  turn on လုပ်ထားရမည်။ [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) တွေကို ဖြစ်နိုင်သလောက် enable လုပ်ထားရမည်။ အချို့ warning တွေကို ignore လုပ်လိုလျှင် [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas) ကို အသုံးပြုပါ။
 
 # Other Objective-C Style Guides
 
-If ours doesn't fit your tastes, have a look at some other style guides:
+အကယ်၍ ယခု style guide ကို သင် မနှစ်သက်ပါက အခြား style guides များကိုလည်း လေ့လာဖတ်ရှု နိုင်သည်။
 
 * [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
 * [GitHub](https://github.com/github/objective-c-conventions)
