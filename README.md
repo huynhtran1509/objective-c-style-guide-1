@@ -438,3 +438,5 @@ physical files များသည် Xcode projects files ဖြင့် sync �
 * [CocoaDevCentral](http://cocoadevcentral.com/articles/000082.php)
 * [Luke Redpath](http://lukeredpath.co.uk/blog/my-objective-c-style-guide.html)
 * [Marcus Zarra](http://www.cimgf.com/zds-code-style-guide/)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/saturngod/objective-c-style-guide/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
